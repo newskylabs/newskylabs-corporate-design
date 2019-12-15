@@ -14,7 +14,7 @@
 ## limitations under the License.
 ## ---------------------------------------------------------
 
-"""newskylabs/graphics/svg/lib/plugin.py:
+"""newskylabs/graphics/svg/library/plugin.py:
 
 A minimal SVG plugin.
 
