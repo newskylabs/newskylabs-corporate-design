@@ -80,7 +80,6 @@ class ConPat(SVGPlugin):
         color       = kwargs['color']
         background  = kwargs['background']
         strokewidth = kwargs['strokewidth']
-        weight      = kwargs['weight']
         
         if debug == 0:
             margin = kwargs['parameter']['margin']
@@ -96,7 +95,6 @@ class ConPat(SVGPlugin):
             print("  - color:       {}".format(color))
             print("  - background:  {}".format(background))
             print("  - strokewidth: {}".format(strokewidth))
-            print("  - weight:      {}".format(weight))
             print("")
            
         # Grid parameters
