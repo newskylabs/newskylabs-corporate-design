@@ -47,9 +47,9 @@ class ConPat(SVGPlugin):
         # DEBUG
         # When a debug level has been given in kwargs
         # overwrite the debug level.
-        if 'debug' in kwargs \
-           and 'level' in kwargs['debug']:
-            debug = kwargs['debug']['level']
+        if isinstance(debug, dict) \
+           and 'level' in debug:
+            debug = debug['level']
         self._debug = debug
 
         self._geometry = x, y, width, height
@@ -81,7 +81,7 @@ class ConPat(SVGPlugin):
         background  = kwargs['background']
         strokewidth = kwargs['strokewidth']
         
-        if debug == 0:
+        if self._debug == 0:
             margin = kwargs['parameter']['margin']
         else:
             margin = kwargs['debug']['margin']
@@ -161,7 +161,7 @@ class ConPat(SVGPlugin):
         # When in debug mode, visualize the original size of the
         # meishi with a frame.  The margin outside the frame is
         # intended to be cut off after printing the meishis.
-        if debug > 0:
+        if self._debug > 0:
             e.addRect(
                 width        = width, 
                 height       = height,
