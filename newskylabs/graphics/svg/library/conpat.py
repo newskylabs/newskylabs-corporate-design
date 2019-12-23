@@ -14,7 +14,7 @@
 ## limitations under the License.
 ## ---------------------------------------------------------
 
-"""newskylabs/graphics/svg/lib/conpat.py:
+"""newskylabs/graphics/svg/library/conpat.py:
 
 Connection Pattern SVG plugin containing a QR-Code encoding a vcard
 with the personal information written on the name card.
