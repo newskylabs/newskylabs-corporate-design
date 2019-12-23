@@ -33,7 +33,7 @@ from newskylabs.graphics.svg.svg import SVGElement
 from newskylabs.graphics.svg.library.plugin import SVGPlugin
 
 ## =========================================================
-## class SVGPlugin
+## class ConPat
 ## ---------------------------------------------------------
 
 class ConPat(SVGPlugin):
