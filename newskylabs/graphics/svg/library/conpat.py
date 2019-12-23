@@ -41,15 +41,14 @@ class ConPat(SVGPlugin):
     def __init__(self, 
                  *args, 
                  x=0, y=0, width='10', height='10',
-                 debug=0,
                  **kwargs):
 
         # DEBUG
         # When a debug level has been given in kwargs
         # overwrite the debug level.
-        if isinstance(debug, dict) \
-           and 'level' in debug:
-            debug = debug['level']
+        if 'debug' in kwargs \
+           and 'level' in kwargs['debug']:
+            debug = kwargs['debug']['level']
         self._debug = debug
 
         self._geometry = x, y, width, height
