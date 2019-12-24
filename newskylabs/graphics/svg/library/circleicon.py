@@ -16,11 +16,7 @@
 
 """newskylabs/graphics/svg/library/circleicon.py:
 
-An SVGElement subclass generating a simple icon assembled from 7 circles:
-
-    o o
-   o o o
-    o o
+An SVGElement subclass generating a simple circle icon.
 
 """
 
@@ -28,7 +24,7 @@ __author__      = "Dietrich Bollmann"
 __email__       = "dietrich@formgames.org"
 __copyright__   = "Copyright 2019 Dietrich Bollmann"
 __license__     = "Apache License 2.0, http://www.apache.org/licenses/LICENSE-2.0"
-__date__        = "2019/12/23"
+__date__        = "2019/12/24"
 
 from math import pi, sin, cos
 
@@ -44,7 +40,6 @@ class CircleIcon():
                  x            = 0, 
                  y            = 0,
                  size         = 1, 
-                 circle_size  = 1, 
                  color        = 'red', 
                  debug        = 0
     ):
@@ -57,14 +52,11 @@ class CircleIcon():
             self._icon = SVGElement('g')
 
         # Icon radius
-        radius = size / 2.0
+        radius = size / 2
         
         # Icon center
         fx = radius
         fy = radius
-
-        # Circle radius
-        r = circle_size / 2
 
         # DEBUG
         if debug > 0:
@@ -75,7 +67,6 @@ class CircleIcon():
             print("    - x:            {}".format(x))
             print("    - y:            {}".format(y))
             print("    - size:         {}".format(size))
-            print("    - circle_size:  {}".format(circle_size))
             print("    - color:        {}".format(color))
             print("")
             print("  - derived parameters:")
@@ -85,16 +76,8 @@ class CircleIcon():
             print("")
             
         # A circle at the center
-        self._icon.addCircle(cx=fx, cy=fy, r=r, fill=color)
+        self._icon.addCircle(cx=fx, cy=fy, r=radius, fill=color)
 
-        # 6 satellite circles
-        segments = 6
-        for i in range(segments):
-            angle = i * 2 * pi / segments
-            x = fx + cos(angle) * radius
-            y = fy + sin(angle) * radius
-            self._icon.addCircle(cx=x, cy=y, r=r, fill=color)
-        
     def toSVG(self):
         return self._icon
 
