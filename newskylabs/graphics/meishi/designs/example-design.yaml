@@ -1,0 +1,93 @@
+## =========================================================
+## Copyright 2019 Dietrich Bollmann
+## 
+## Licensed under the Apache License, Version 2.0 (the "License");
+## you may not use this file except in compliance with the License.
+## You may obtain a copy of the License at
+## 
+##      http://www.apache.org/licenses/LICENSE-2.0
+## 
+## Unless required by applicable law or agreed to in writing, software
+## distributed under the License is distributed on an "AS IS" BASIS,
+## WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+## See the License for the specific language governing permissions and
+## limitations under the License.
+## ---------------------------------------------------------
+
+info:
+  file:       newskylabs/graphics/meishi/designs/example-design.yaml
+  doc:        Meishi example design
+  author:     Dietrich Bollmann
+  email:      dietrich@formgames.org
+  copyright:  Copyright 2019 Dietrich Bollmann
+  license:    Apache License 2.0, http://www.apache.org/licenses/LICENSE-2.0
+  date:       2019/12/27
+
+debug: &debug
+  #| level:   1
+  level:   0
+  margin: 20
+
+content: &content
+
+  name:
+    family: Body
+    given:  Some
+    suffix: ', PhD'
+
+  title: Some Title
+
+  org:
+    name: Some Organization
+    unit: Some Unit
+
+  contact:
+
+    work:
+      email: some@bo.dy
+      url:   https://ex.amp.le
+      tel:   +11-222-33-44-55
+      adr:
+        street:  Some Street 123
+        city:    Somecity
+        code:    12321
+        country: Somecountry
+
+svgfile: 
+  front:  example-front.svg
+  back:   example-back.svg
+
+pdffile: 
+  front:  example-front.pdf
+  back:   example-back.pdf
+  merged: example.pdf
+
+parameter: &parameter
+  width:       85 
+  height:      55
+  margin:      1
+  color:       &color green
+  background:  &background white
+
+icon:
+  class:        newskylabs.graphics.svg.library.sevencirclesicon.SevenCirclesIcon
+  debug:        1
+  x:            2
+  y:            2
+  size:         10
+  circle_size:  4
+  color:        *color
+
+back-side:
+  class: newskylabs.graphics.svg.library.dots.Dots
+  debug:       *debug
+  parameter:   *parameter
+  content:     *content
+  color:       *background
+  background:  *color
+  dotsize:     2
+
+## =========================================================
+## =========================================================
+
+## fin.
