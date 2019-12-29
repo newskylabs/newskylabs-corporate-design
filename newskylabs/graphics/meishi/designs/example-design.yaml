@@ -23,9 +23,9 @@ info:
   license:    Apache License 2.0, http://www.apache.org/licenses/LICENSE-2.0
   date:       2019/12/27
 
-debug: &debug
-  #| level:   1
-  level:   0
+debug:
+  #| level: &debug 1
+  level: &debug 0
   margin: 20
 
 content: &content
@@ -71,7 +71,7 @@ parameter: &parameter
 
 icon:
   class:        newskylabs.graphics.svg.library.sevencirclesicon.SevenCirclesIcon
-  debug:        1
+  debug:        *debug
   x:            2
   y:            2
   size:         10
