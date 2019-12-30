@@ -49,10 +49,11 @@ class VCard:
     A wrapper for vobject.vCard.
     """
 
-    def __init__(self, data):
+    def __init__(self, data, debug=0):
 
         # DEBUG
-        #| print("DEBUG VCard data: {}".format(data))
+        if debug > 0:
+            print("DEBUG VCard data: {}".format(data))
 
         vcard = vobject.vCard()
         self._vcard = vcard
@@ -117,7 +118,7 @@ class VCard:
         vcard.adr.value = vobject.vcard.Address(
             street  = adr['street'],
             city    = adr['city'],
-            code    = adr['code'],
+            code    = str(adr['code']),
             country = adr['country']
         )
 
@@ -138,6 +139,25 @@ class VCard:
         # Convert to string
         vcard_str = self._vcard.serialize()
         return vcard_str
+
+    def to_QRCode(self, format='png', method=None):
+        """
+        Examples:
+        vc = VCard(_data)
+        qr_code_img = vc.to_qr_code()
+        qr_code_img.save('/tmp/qr-code.png')
+        qr_code_img.save('/tmp/qr-code.jpg')
+
+        """
+
+        # Convert vcard to string
+        vcard_str = self._vcard.serialize()
+
+        # Convert to QRCode obj
+        from newskylabs.graphics.svg.library.qrcode import QRCode
+        qrcode = QRCode(vcard_str)
+
+        return qrcode
 
     def print(self, raw=False):
 
