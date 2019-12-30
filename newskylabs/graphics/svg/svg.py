@@ -78,7 +78,8 @@ class SVGElement(XMLElement):
 
     def addTranslate(self, x=0, y=0):
         transform = 'translate({}, {})'.format(x, y)
-        return self.addTransform(transform)
+        child = self.addTransform(transform)
+        return child
 
     def addScale(self, x=None, y=None):
 
@@ -95,7 +96,8 @@ class SVGElement(XMLElement):
             # Scale both dimensions equally
             transform = 'scale({})'.format(x)
 
-        return self.addTransform(transform)
+        child = self.addTransform(transform)
+        return child
 
     def _format_path(self, path, close_path=False):
 
@@ -131,6 +133,34 @@ class SVGElement(XMLElement):
         self.append(child)
         return child
 
+    def addQRCode(self, 
+                  data,
+                  x      = 0,
+                  y      = 0,
+                  width  = 10,
+                  height = 10,
+    ):
+        # Convert the data to a VCard
+        from newskylabs.graphics.svg.library.vcard import VCard
+        vcard = VCard(data)
+
+        # Convert to a QRCode object
+        qr_code = vcard.to_QRCode()
+
+        # DEBUG
+        #| print("DEBUG SVGElement.addQRCode(): QR-Code data:\n\n{}".format(qr_code.get_data()))
+
+        # Convert to SVGElement
+        child = qr_code.to_SVGElement(x=x, y=y, width=width, height=height)
+
+        # And append it
+        self.append(child)
+
+        # Return the plugin for method chaining
+        return child
+
+        #| child = SVGElement(tag, *args, **kwargs)
+
     def addCSSRule(self, selector, *args, **kwargs):
 
         # Create a new CSS rule element with the given name
@@ -149,23 +179,36 @@ class SVGElement(XMLElement):
         # Add it to the parent as text
         self._xml.text += rulestr
 
-    def addIcon(self, iconclass, *args, **kwargs):
+    def addPlugin(self, plugin, *args, debug=0, **kwargs):
 
-        # Load icon class dynamically 
-        icon_class_path = iconclass.split('.')
-        module_name = '.'.join(icon_class_path[:-1])
-        class_name = icon_class_path[-1]
+        # Get plugin class and parameters
+        plugin_class = plugin['class']
+        del plugin['class']
+        plugin_params = plugin
+
+        # Overwrite parameters given in kwargs
+        for param, value in kwargs.items():
+            if not param in ['debug']:
+                plugin_params[param] = value
+            
+        if debug > 0:
+            print("DEBUG SVGElement.addPlugin(): plugin_params:", plugin_params)
+
+        # Load plugin class dynamically 
+        plugin_class_path = plugin_class.split('.')
+        module_name = '.'.join(plugin_class_path[:-1])
+        class_name = plugin_class_path[-1]
         module = importlib.import_module(module_name)
-        icon_class = getattr(module, class_name)
+        plugin_class = getattr(module, class_name)
         
-        # Assemble the icon
-        icon = icon_class(*args, **kwargs)
-        child = icon.toSVG()
+        # Assemble the plugin
+        plugin = plugin_class(**plugin_params)
+        child = plugin.toSVG()
 
-        # Append the icon
+        # Append the plugin
         self.append(child)
 
-        # Return the icon for method chaining
+        # Return the plugin for method chaining
         return child
 
     def __getattr__(self, name):
