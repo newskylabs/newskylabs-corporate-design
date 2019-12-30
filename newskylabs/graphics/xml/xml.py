@@ -61,7 +61,7 @@ class XMLElement():
 
     def append(self, element):
 
-        if isinstance(element, self.__class__):
+        if isinstance(element, XMLElement):
             # ELEMENT is an XMLElement
             # Append the element and return it
             element = element._xml
