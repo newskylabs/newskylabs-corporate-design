@@ -46,9 +46,8 @@ class SimpleBackside(SVGPlugin):
         # DEBUG
         # When a debug level has been given in kwargs
         # overwrite the debug level.
-        if 'debug' in kwargs \
-           and 'level' in kwargs['debug']:
-            debug = kwargs['debug']['level']
+        if 'debug' in kwargs:
+            debug = kwargs['debug']
         self._debug = debug
 
         self._geometry = x, y, width, height
@@ -116,7 +115,7 @@ class SimpleBackside(SVGPlugin):
         # When in debug mode, visualize the original size of the
         # meishi with a frame.  The margin outside the frame is
         # intended to be cut off after printing the meishis.
-        if True: #self._debug > 0:
+        if self._debug > 0:
             e.addRect(
                 width        = width, 
                 height       = height,
@@ -125,20 +124,11 @@ class SimpleBackside(SVGPlugin):
                 fill         = 'none'
             )
 
-        # Calculate position of QR-Code
+        # Position the QR-Code
         qr_x = (width  - qrcode_size) / 2
         qr_y = (height - qrcode_size) / 2
-            
-        print(">>>>>>>>>>>>> qr_x: {}, qr_y: {}".format(qr_x, qr_y))
-
-        # >>>>>>>>>>>>> rx: 20.640350877192983, ry: 4.5476190476190474
-        # >>>>>>>>>>>>> size_x: 43.719298245614034, size_y: 45.904761904761905
-
-
         e = e.addTranslate(x=qr_x, y=qr_y)
 
-        print(">>>>>>>>>>>>> qrcode_size: {}".format(qrcode_size))
-        
         # Add a white background for the QR-Code
         rect = e.addRect(
             width  = qrcode_size, 
