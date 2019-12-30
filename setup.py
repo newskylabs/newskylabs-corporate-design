@@ -81,7 +81,7 @@ setuptools.setup(
         ]
     },
     package_data={
-        'newskylabs.graphics.scripts': ['defaults.yaml'],
+        'newskylabs.graphics.meishi.designs': ['*.yaml'],
     },
     include_package_data=True,
     install_requires=[
