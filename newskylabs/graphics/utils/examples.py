@@ -39,13 +39,18 @@ def get_example_prefix():
     
     Example: 
     
-      'some-class-examples' -> 'some_class_example_'
+      'some-class-examples.py' -> 'some_class_example_'
+      'some-class-examples'    -> 'some_class_example_'
 
     """
 
     # Get the name of the examples script
     script_name = os.path.basename(sys.argv[0])
     example_prefix = script_name
+
+    # Get rid of '.py' suffix when exiting
+    if example_prefix[-3:] == '.py':
+        example_prefix = example_prefix[:-3]
 
     # Get rid of the final 's'
     # Example: 'some-class-examples' -> 'some-class-example'
@@ -84,14 +89,18 @@ def usage(examples):
     script_path = sys.argv[0]
 
     # Get the name of the examples script
-    script_name = os.path.basename(sys.argv[0])
+    alias = os.path.basename(sys.argv[0])
+
+    # Get rid of '.py' suffix when exiting
+    if alias[-3:] == '.py':
+        alias = alias[:-3]
 
     print("Usage:")
     print("")
-    print("alias {}=\"{}\"".format(script_name, script_path))
+    print("alias {}=\"{}\"".format(alias, script_path))
     print("")
     for example in examples:
-        print("{} {}".format(script_name, example))
+        print("{} {}".format(alias, example))
     print("")
 
 ## =========================================================
