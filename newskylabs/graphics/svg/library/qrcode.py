@@ -40,7 +40,7 @@ from newskylabs.graphics.svg.svg import SVGElement
 
 class QRCode():
 
-    def __init__(self, data, debug=1):
+    def __init__(self, data, debug=0):
         self._data  = data
         self._debug = debug
 
