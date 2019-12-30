@@ -35,7 +35,7 @@ from newskylabs.graphics.svg.svg import SVGElement
 
 class SVGIcon():
 
-    def __init__(self, *args, debug=1, **kwargs):
+    def __init__(self, *args, debug=0, **kwargs):
     
         # Store icon parameters
         self._debug  = debug
